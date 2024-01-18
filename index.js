@@ -1,7 +1,6 @@
 const searchBtn = document.querySelector('#search');
 const inputEl = document.querySelector('input');
-const moviePosterEl = document.querySelector('.movie-poster');
-const movieTitleEl = document.querySelector('.movie-title');
+const movieEl = document.querySelector('.movie');
 
 searchBtn.addEventListener('click', async () => {
   const res = await fetch(
@@ -15,8 +14,9 @@ function displayMovieInfo(moviesArr) {
   let html = '';
   moviesArr.forEach((movie) => {
     console.log(movie);
-    html += `<div>${movie.Title}</div>`;
+    html += `<div><img src="${movie.Poster}"></div>
+    <div>${movie.Title}</div>`;
   });
 
-  movieTitleEl.innerHTML = html;
+  movieEl.innerHTML = html;
 }
