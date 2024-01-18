@@ -5,14 +5,18 @@ const movieTitleEl = document.querySelector('.movie-title');
 
 searchBtn.addEventListener('click', async () => {
   const res = await fetch(
-    `http://www.omdbapi.com/?t=${inputEl.value}&apikey=c558ae09`
+    `http://www.omdbapi.com/?s=${inputEl.value}&apikey=c558ae09`
   );
   const movies = await res.json();
-  console.log(movies);
-  displayMovieInfo(movies);
+  displayMovieInfo(movies.Search);
 });
 
-function displayMovieInfo(movies) {
-  moviePosterEl.innerHTML = `<img src=${movies.Poster}>`;
-  movieTitleEl.innerText = `${movies.Title}`;
+function displayMovieInfo(moviesArr) {
+  let html = '';
+  moviesArr.forEach((movie) => {
+    console.log(movie);
+    html += `<div>${movie.Title}</div>`;
+  });
+
+  movieTitleEl.innerHTML = html;
 }
