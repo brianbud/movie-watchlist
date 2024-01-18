@@ -1,6 +1,6 @@
 const searchBtn = document.querySelector('#search');
 const inputEl = document.querySelector('input');
-const movieEl = document.querySelector('.movie');
+const moviesEl = document.querySelector('.movies');
 
 searchBtn.addEventListener('click', async () => {
   const res = await fetch(
@@ -10,13 +10,22 @@ searchBtn.addEventListener('click', async () => {
   displayMovieInfo(movies.Search);
 });
 
-function displayMovieInfo(moviesArr) {
+async function displayMovieInfo(moviesArr) {
   let html = '';
-  moviesArr.forEach((movie) => {
-    console.log(movie);
-    html += `<div><img src="${movie.Poster}"></div>
-    <div>${movie.Title}</div>`;
-  });
 
-  movieEl.innerHTML = html;
+  for (let movie of moviesArr) {
+    const res = await fetch(
+      `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=c558ae09`
+    );
+    const data = await res.json();
+    console.log(data);
+    html += `
+    <div class="movie-item">
+    <div><img src="${data.Poster}"></div>
+    <div>${data.Title}</div>
+    </div>
+    `;
+  }
+
+  moviesEl.innerHTML = html;
 }
