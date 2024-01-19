@@ -17,7 +17,6 @@ async function displayMovieInfo(moviesArr) {
       `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=c558ae09`
     );
     const data = await res.json();
-    console.log(data);
     html += `
     <div class="movie-item">
     <div><img src="${data.Poster}"></div>
@@ -35,6 +34,8 @@ async function displayMovieInfo(moviesArr) {
     let button = document.getElementById(movie.imdbID);
     button.addEventListener('click', (e) => {
       console.log(e.target.id);
+      let movieID = e.target.id;
+      localStorage.setItem('wishlist', `${movieID}`);
     });
   }
 }
