@@ -4,3 +4,5 @@ indexPageEl.addEventListener('click', () => {
   console.log('clicked');
   location.replace(`./index.html`);
 });
+
+console.log(localStorage.getItem('wishlist'));
