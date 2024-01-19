@@ -1,6 +1,8 @@
 const searchBtn = document.querySelector('#search');
 const inputEl = document.querySelector('input');
 const moviesEl = document.querySelector('.movies');
+const watchlistEl = document.querySelector('#watchlist');
+
 searchBtn.addEventListener('click', async () => {
   const res = await fetch(
     `http://www.omdbapi.com/?s=${inputEl.value}&apikey=c558ae09`
@@ -39,3 +41,8 @@ async function displayMovieInfo(moviesArr) {
     });
   }
 }
+
+watchlistEl.addEventListener('click', () => {
+  console.log('open watchlist page');
+  location.replace(`./watchlist.html`);
+});
